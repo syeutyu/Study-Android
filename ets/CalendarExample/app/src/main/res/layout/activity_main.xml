@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.user.calendarexample.MainActivity">
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/Label"
+        android:background="#c3feff"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        />
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:numColumns="auto_fit"
+        android:listSelector="#4d2b2b"
+        android:columnWidth="5dp"
+        android:stretchMode="columnWidth"
+        >
+    </GridView>
+
+</LinearLayout>
