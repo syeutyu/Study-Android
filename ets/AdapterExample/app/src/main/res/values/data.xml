@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="weather">
+        <item>월 : 월요병</item>
+        <item>화 : 화요병</item>
+        <item>수 : 수요병</item>
+        <item>목 : 하루만 더...</item>
+        <item>금 : 불금</item>
+        <item>토 : 행복하다...</item>
+        <item>일 : 월요일 걱정..</item>
+
+    </string-array>
+
+</resources>
