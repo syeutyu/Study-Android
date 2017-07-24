@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.junier.Day">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <CalendarView
+            android:id="@+id/cal"
+            android:layout_width="match_parent"
+            android:showWeekNumber="false"
+            android:layout_height="400dp">
+        </CalendarView>
+        <Button
+            android:id="@+id/cancel"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cal"
+            android:layout_alignParentBottom="@id/cal"
+            android:text="취소하기"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
