@@ -40,7 +40,6 @@ public class Day extends AppCompatActivity {
 
 
                     num = year + "," + (month + 1) + "," + dayOfMonth;
-                    //Log.v("텍스트 중앙",android:layout_centerInParent="true")
 
                     for (int i = 0; i < arr.size(); i++) {
 
