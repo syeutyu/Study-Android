@@ -98,7 +98,15 @@
                     android:scaleType="fitXY"
                     android:onClick="OnClick"
                     android:src="@drawable/onecircle" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Day 단위"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/one"
+                    android:layout_alignLeft="@id/one"
 
+                    />
                 <View
                     android:id="@+id/tag1"
                     android:layout_width="2dp"
@@ -118,6 +126,13 @@
                     android:scaleType="fitXY"
                     android:onClick="OnClick"
                     android:src="@drawable/onecircle" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Week 단위"
+                    android:layout_marginLeft="13dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/two" />
 
                 <View
                     android:id="@+id/tag2"
@@ -139,6 +154,13 @@
                     android:scaleType="fitXY"
 
                     android:src="@drawable/onecircle" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Week 단위"
+                    android:layout_marginLeft="11dp"
+                    android:layout_alignRight="@id/three"
+                    android:layout_below="@id/two" />
 
             </RelativeLayout>
         </RelativeLayout>
