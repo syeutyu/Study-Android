@@ -15,7 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Day extends AppCompatActivity {
+public class Week extends AppCompatActivity {
+
     String daydata;
     public static String num;
     public ArrayList<String> arr = new ArrayList<>();
@@ -56,7 +57,6 @@ public class Day extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MainActivity.class);
-//                intent.putExtra("Date",daydata);
                 startActivity(intent);
                 finish();
 
@@ -112,7 +112,7 @@ public class Day extends AppCompatActivity {
                         arr.add(num);
                         Log.v("data 날짜", String.valueOf(arr.size()));
 
-                        Toast.makeText(Day.this, num + "이 저장되었습니다. ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, num + "이 저장되었습니다. ", Toast.LENGTH_SHORT).show();
 
                         for (int i = 0; i < arr.size(); i++) {
 
