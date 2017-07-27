@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(context,Signup.class);
-                startActivity(intent1);     
+                startActivity(intent1);
             }
         });
         text = (TextInputEditText) findViewById(R.id.purpose);
