@@ -43,10 +43,8 @@ public class Day extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
-
-
                 Datecheck = getNowDate(year,month,dayOfMonth);
-                num = year + "," + (month + 1) + "," + dayOfMonth;
+                num = (month + 1) + "," + dayOfMonth+"  ";
 
                 addAndDeleteDate(context, day,num);
             }
