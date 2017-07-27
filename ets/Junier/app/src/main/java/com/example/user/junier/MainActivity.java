@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String tag = "로그";
+    public static final int Result_Code = 1001;
     public static String purpose;
     public static String stringData;
     private TextInputEditText text;
@@ -25,28 +27,43 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void OnClick(View v){
-        switch (v.getId()){
-            case R.id.one : {
+    public void OnClick(View v) {
+        switch (v.getId()) {
+            case R.id.one: {
                 purpose = text.getText().toString();
-                Log.d("purpose 값 ",purpose);
+                Log.d("purpose 값 ", purpose);
 
-                Toast.makeText(getApplicationContext(),"Day화면 출력",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this,Day.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Day화면 출력", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, Day.class);
+                startActivityForResult(intent, Result_Code);
 
                 break;
             }
-            case R.id.two : {
-                Toast.makeText(getApplicationContext(),"Week화면 출력",Toast.LENGTH_SHORT).show();
+            case R.id.two: {
+                Toast.makeText(getApplicationContext(), "Week화면 출력", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Week.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.three : {
-                Toast.makeText(getApplicationContext(),"three 출력",Toast.LENGTH_SHORT).show();
+            case R.id.three: {
+                Toast.makeText(getApplicationContext(), "three 출력", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(tag, "onActivityResult");
+        Log.d(tag,String.valueOf(requestCode));
+        Log.d(tag,String.valueOf(resultCode));
+
+
+        if (requestCode == 1) {
+
+            String Date = data.getStringExtra("Date");
+            Log.d("String data", Date);
+        }
+    }
+
+
 }

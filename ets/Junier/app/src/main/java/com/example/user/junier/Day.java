@@ -11,12 +11,16 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+
+import static com.example.user.junier.MainActivity.Result_Code;
+import static com.example.user.junier.MainActivity.tag;
 
 public class Day extends AppCompatActivity {
-    String daydata;
+    public Boolean Datecheck = true;
+    public static String daydata;
+
     public static String num;
     public ArrayList<String> arr = new ArrayList<>();
 
@@ -40,13 +44,11 @@ public class Day extends AppCompatActivity {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
 
-                String numdate = compareDate(year, month, dayOfMonth);
 
-                int nowday = getNowDate();
-                int numday = Integer.parseInt(numdate);
+                Datecheck = getNowDate(year,month,dayOfMonth);
                 num = year + "," + (month + 1) + "," + dayOfMonth;
 
-                addAndDeleteDate(context, day, nowday, numday,num);
+                addAndDeleteDate(context, day,num);
             }
         });
 
@@ -56,45 +58,61 @@ public class Day extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MainActivity.class);
-//                intent.putExtra("Date",daydata);
-                startActivity(intent);
+                intent.putExtra("Date",daydata);
+                setResult(Result_Code,intent);
                 finish();
 
             }
         });
     }
 
-    public int getNowDate() {
-        long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Log.d("날자", String.valueOf(sdf));
-        String getTime = sdf.format(date);
+    public Boolean getNowDate(int year,int month, int dayOfMonth) {
+        Calendar aDate = Calendar.getInstance();
+        Calendar bDate = Calendar.getInstance();
+        aDate.set(year,month,dayOfMonth);
 
-        int time = Integer.parseInt(getTime);
+        aDate.set( Calendar.HOUR_OF_DAY, 0 );
+         aDate.set( Calendar.MINUTE, 0 );
+         aDate.set( Calendar.SECOND, 0 );
+         aDate.set( Calendar.MILLISECOND, 0 );
+         bDate.set( Calendar.HOUR_OF_DAY, 0 );
+         bDate.set( Calendar.MINUTE, 0 );
+         bDate.set( Calendar.SECOND, 0 );
+         bDate.set( Calendar.MILLISECOND, 0 );
 
-        Log.d("현재 날자", String.valueOf(time));
-        return time;
-    }
+        Log.v(tag,String.valueOf(aDate));
+        Log.v(tag,String.valueOf(bDate));
 
-    public String compareDate(int year, int month, int dayOfMonth) {
-        if ((month + 1) < 10) {
-            return year + "" + "0" + (month + 1) + dayOfMonth;
-        } else {
-            return year + "" + (month + 1) + dayOfMonth;
+        if(aDate.after(bDate)){
+            Log.v(tag,"일수가 더 큼");
+            return true;
+        } else if (aDate.before(bDate)){
+            Log.v(tag,"일수가 더 작음");
+            return false;
+        } else{
+            Log.v(tag,"일수가 같음");
+            return true;
         }
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        //Log.d("날자", String.valueOf(sdf));
+        //String getTime = sdf.format(date);
+
+        //int time = Integer.parseInt(getTime);
+
     }
 
-    public void addAndDeleteDate(Context context, TextView day, int nowday, int numday,String num) {
+    public void addAndDeleteDate(Context context, TextView day,String num) {
+        Boolean check = true;
         String data = null;
         daydata = null;
-        Boolean check = true;
-        if (nowday <= numday) {
+
+        if (Datecheck == true) {
             try {
                 for (int i = 0; i < arr.size(); i++) {
 
                     if (num.equals(arr.get(i))) {
-
+                    Log.d("일치하는 데이터 찾음",arr.get(i));
                         check = false;
                         break;
                     } else {
