@@ -121,7 +121,6 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
                     android:background="#00ffffff"
-                    android:onClick="OnClick"
                     android:scaleType="fitXY"
                     android:src="@drawable/date" />
 
@@ -152,7 +151,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/tag1"
                     android:background="#00ffffff"
-                    android:onClick="OnClick"
                     android:scaleType="fitXY"
                     android:src="@drawable/week" />
 
@@ -180,7 +178,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/tag2"
                     android:background="#00ffffff"
-                    android:onClick="OnClick"
                     android:scaleType="fitXY"
                     android:src="@drawable/month" />
 
