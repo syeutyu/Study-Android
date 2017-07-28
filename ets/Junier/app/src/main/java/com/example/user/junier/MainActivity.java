@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.FacebookSdk;
 
 public class MainActivity extends AppCompatActivity {
     public static final String tag = "로그";
@@ -22,26 +21,24 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText text;
     private TextView daytext;
     private Button In;
+    private Toolbar Toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        FacebookSdk.sdkInitialize(getApplicationContext());
-
+        Log.d("생성","메인");
         In = (Button)findViewById(R.id.Invite);
         In.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("Facebook Friend ","Invite");
                 Intent intent1 = new Intent(context,Signup.class);
                 startActivity(intent1);
             }
         });
         text = (TextInputEditText) findViewById(R.id.purpose);
         daytext = (TextView)findViewById(R.id.select_day);
-
-
 
     }
 
@@ -72,10 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(tag, "onActivityResult");
-
+        try{
         if (requestCode == Result_Code) {
             String Date = data.getStringExtra("Date");
+            Log.d("Date",Date);
             daytext.setText(Date);
+        }
+        }catch (Exception e){
+            e.getMessage();
         }
     }
 

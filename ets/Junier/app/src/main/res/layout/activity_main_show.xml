@@ -1,86 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.user.junier.MainShow">
 
-    <TabHost
-        android:id="@+id/tabHost1"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e2ffed"
+        android:minHeight="?attr/actionBarSize"/>
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"> <!-- TabWidget의 id값이 반드시 "tabs"로 지정되어야 함. -->
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true" /> <!-- FrameLayout의 id값이 반드시 "tabcontent"로 지정되어야 함. -->
-            <FrameLayout
+    </FrameLayout>
 
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"> <!-- 첫 번째 페이지. content1 -->
-                <RelativeLayout
-                    android:id="@+id/content1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:background="#8BC34A"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="TAB CONTENT 1" />
-
-                    <TextView
-
-                        android:textSize="20sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@id/content1"
-                        android:layout_centerInParent="true"
-                        android:text="메인페이지" />
-
-                </RelativeLayout> <!-- 두 번째 페이지. content2 -->
-                <LinearLayout
-                    android:id="@+id/content2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#009688"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="TAB CONTENT 2" />
-                </LinearLayout> <!-- 세 번째 페이지. content3 -->
-                <LinearLayout
-                    android:id="@+id/content3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#2196F3"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="TAB CONTENT 3" />
-                </LinearLayout>
-            </FrameLayout>
-        </RelativeLayout>
-    </TabHost>
-
-
-</RelativeLayout>
+</LinearLayout>

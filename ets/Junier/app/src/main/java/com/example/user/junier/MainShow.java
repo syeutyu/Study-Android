@@ -1,35 +1,69 @@
 package com.example.user.junier;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TabHost;
 
 public class MainShow extends AppCompatActivity {
+    private TabLayout tabLayout;
+    private Context context = this;
+    TabFragment1 fragment1;
+    TabFragment2 fragment2;
+    TabFragment3 fragment3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_show);
 
-        TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1);
-        tabHost1.setup();
+        // Initializing the TabLayout
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Main Page "));
+        tabLayout.addTab(tabLayout.newTab().setText("Plan Page"));
+        tabLayout.addTab(tabLayout.newTab().setText("My Page"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        fragment1 = new TabFragment1();
+        fragment2 = new TabFragment2();
+        fragment3 = new TabFragment3();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment1).commit();
 
 
-        TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1");
-        ts1.setContent(R.id.content1);
-        ts1.setIndicator("TAB 1");
-        tabHost1.addTab(ts1);
+        //TabPagerAdapter pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
-        TabHost.TabSpec ts2 = tabHost1.newTabSpec("Tab Spec 2");
-        ts2.setContent(R.id.content2);
-        ts2.setIndicator("TAB 2");
-        tabHost1.addTab(ts2);
+        // Set TabSelectedListener
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
-        TabHost.TabSpec ts3 = tabHost1.newTabSpec("Tab Spec 3");
-        ts3.setContent(R.id.content3);
-        ts3.setIndicator("TAB 3");
-        tabHost1.addTab(ts3);
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                Fragment fragment = null;
+
+                if (position == 0) {
+                    fragment = fragment1;
+                } else if (position == 1) {
+                    fragment = fragment2;
+                } else if (position == 3) {
+                    fragment = fragment3;
+                }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
-
 }
