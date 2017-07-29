@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".Day" />
         <activity android:name=".Week" />
         <activity android:name=".Signup" />
@@ -43,7 +43,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlanCheck"></activity>
+        <activity android:name=".PlanCheck" />
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.example.user.junier;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MainShow extends AppCompatActivity {
     private TabLayout tabLayout;
-    private Context context = this;
     TabFragment1 fragment1;
     TabFragment2 fragment2;
     TabFragment3 fragment3;
@@ -31,9 +29,6 @@ public class MainShow extends AppCompatActivity {
         fragment3 = new TabFragment3();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment1).commit();
 
-
-        //TabPagerAdapter pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-
         // Set TabSelectedListener
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
@@ -46,7 +41,7 @@ public class MainShow extends AppCompatActivity {
                     fragment = fragment1;
                 } else if (position == 1) {
                     fragment = fragment2;
-                } else if (position == 3) {
+                } else if (position == 2) {
                     fragment = fragment3;
                 }
 
@@ -55,13 +50,10 @@ public class MainShow extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 

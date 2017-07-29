@@ -2,6 +2,7 @@ package com.example.user.junier;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +20,17 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText text;
     private TextView daytext;
     private Button In;
-
+    public static final int version = 1;
+    Datebase helper;
+    SQLiteDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("생성","메인");
+        helper = new Datebase(context,Datebase.Schema,null,version);
+        database = helper.getWritableDatabase();
+
+
         In = (Button)findViewById(R.id.Invite);
         In.setOnClickListener(new View.OnClickListener() {
             @Override
