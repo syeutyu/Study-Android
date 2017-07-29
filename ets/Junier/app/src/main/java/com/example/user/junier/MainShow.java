@@ -1,5 +1,7 @@
 package com.example.user.junier;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,8 +18,11 @@ public class MainShow extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_show);
+        startActivity(new Intent(this,SplashActivity.class));
 
-        // Initializing the TabLayout
+
+
+                // Initializing the TabLayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Main Page "));
         tabLayout.addTab(tabLayout.newTab().setText("Plan Page"));

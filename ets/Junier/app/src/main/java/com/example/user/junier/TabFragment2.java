@@ -83,7 +83,7 @@ public class TabFragment2 extends Fragment {
             public void onClick(View view) {
                 String purpose = text.getText().toString();
                 helper.insertDate(database,purpose,Date);
-                Log.d("목표저장",purpose+"/"+Date); 
+                Log.d("목표저장",purpose+"/"+Date);
             }
         });
 

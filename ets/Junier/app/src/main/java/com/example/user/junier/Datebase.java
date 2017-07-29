@@ -29,7 +29,7 @@ public class Datebase extends SQLiteOpenHelper{
     }
 
     public void createDB(SQLiteDatabase db){
-        String sql = "CREATE TABLE" + Schema + "(next time)";
+        String sql = "CREATE TABLE" + Schema + "(next time)"; //이부분 수정이 필요합니다
         try{
             db.execSQL(sql);
         }catch(SQLException e){
@@ -40,7 +40,7 @@ public class Datebase extends SQLiteOpenHelper{
     public void insertDate(SQLiteDatabase db,String data,String date){
         db.beginTransaction();
         try{
-            String sql = "insert into"+ Schema +"(name)"+"values('"+data+"',"+date+"')";
+            String sql = "insert into"+ Schema +"(name)"+"values('"+data+"','"+date+"')";
             Log.d("SQL구문",sql);
             db.execSQL(sql);
             db.setTransactionSuccessful();

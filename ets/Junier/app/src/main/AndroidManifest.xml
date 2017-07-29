@@ -22,6 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -44,6 +47,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlanCheck" />
+        <activity android:name=".Signin"></activity>
     </application>
 
 </manifest>
