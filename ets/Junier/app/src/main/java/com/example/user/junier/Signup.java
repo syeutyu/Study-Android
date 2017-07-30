@@ -2,14 +2,13 @@ package com.example.user.junier;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -32,7 +31,6 @@ public class Signup extends AppCompatActivity {
     private EditText id,password,name;
     private Button signup;
     Datebase helper;
-    SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,6 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         helper = new Datebase(context,Datebase.Schema,null,version);
-        database = helper.getWritableDatabase();
         id = (EditText)findViewById(R.id.input_email);
         password = (EditText)findViewById(R.id.input_password);
         name = (EditText)findViewById(R.id.input_name);
@@ -51,13 +48,17 @@ public class Signup extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String uid = id.getText().toString();
                 String upassword = password.getText().toString();
                 String uname = name.getText().toString();
+                Log.d("화원가입","완료");
 
-                helper.insertSign(database,uid,upassword,uname);
-                Snackbar.make(view,"회원 가입 완료",Snackbar.LENGTH_SHORT).show();
-                Intent intent = new Intent(context,MainShow.class);
+                helper.insertSign(uid,upassword,uname);
+
+                Toast.makeText(getApplicationContext(),"회원가입 완료",Toast.LENGTH_SHORT).show();
+                //Snackbar.make(view,"회원 가입 완료",Snackbar.LENGTH_SHORT).show();
+                Intent intent = new Intent(context,Signin.class);
                 startActivity(intent);
                 finish();
             }

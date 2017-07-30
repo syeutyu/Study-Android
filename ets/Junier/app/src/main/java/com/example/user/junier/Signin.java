@@ -1,6 +1,7 @@
 package com.example.user.junier;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,22 +9,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import static com.example.user.junier.TabFragment2.version;
+
 public class Signin extends AppCompatActivity {
     public EditText login;
     public EditText password;
     public Button loginbtn;
-
+    Datebase helper;
+    SQLiteDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
         startActivity(new Intent(this,SplashActivity.class));
+        helper = new Datebase(getApplicationContext(),Datebase.Schema,null,version);
 
         setting();
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    //테이블에서 정보찾고 있으면 메인 이동 없을경우 에러 snackbar 띄워주기
+                String id = login.getText().toString();
+                String pw = password.getText().toString();
+                Log.d(id+","+pw," 을 이용해서 정보 검색");
+                String user = helper.getSign(id,pw);
+                Log.d("찾은 데이터 ",user);
             }
         });
     }

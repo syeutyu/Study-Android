@@ -3,6 +3,8 @@
     package="com.example.user.junier">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permisson android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -42,7 +44,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlanCheck" />
-        <activity android:name=".Signin">
+        <activity android:name=".Signin"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

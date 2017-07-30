@@ -1,6 +1,7 @@
 package com.example.user.junier;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,9 +11,8 @@ import android.util.Log;
  * Created by user on 2017-07-29.
  */
 
-public class Datebase extends SQLiteOpenHelper{
-
-    public static final String Schema = "PlanW";
+public class Datebase extends SQLiteOpenHelper {
+    public static final String Schema = "PlanWT.db";
 
     public Datebase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -28,42 +28,54 @@ public class Datebase extends SQLiteOpenHelper{
 
     }
 
-    public void createDB(SQLiteDatabase db){
-        String sql = "CREATE TABLE" + Schema + "(id text,password text,name text,date text,purpose text)"; //이부분 수정이 필요합니다
-        try{
+    public void createDB(SQLiteDatabase db) {
+        Log.d("SQLite DB", "생성완료");
+        String sql = "CREATE TABLE PlanWT (id TEXT DEFAULT '',password TEXT DEFAULT '',name TEXT DEFAULT '',date TEXT DEFAULT '',purpose TEXT DEFAULT '')"; //이부분 수정이 필요합니다
+        try {
             db.execSQL(sql);
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.getMessage();
         }
     }
 
-    public void insertDate(SQLiteDatabase db,String data,String date){
-        db.beginTransaction();
-        try{
-            String sql = "insert into"+ Schema +"(date, purpose)"+"values('"+date+"','"+data+"')";
-            Log.d("Inser Date SQL",sql);
+    public void insertDate(String data, String date) {
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            String sql = "INSERT INTO PlanWT (date, purpose) VALUES('" + date + "','" + data + "');";
+            Log.d("Inser Date SQL", sql);
             db.execSQL(sql);
-            db.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
-        }
-        finally {
-            db.endTransaction();;
         }
     }
 
-    public void insertSign(SQLiteDatabase db,String id,String password,String name){
-        db.beginTransaction();
-        try{
-            String sql = "insert into"+Schema+"(id, password,name)"+"values('"+id+"','"+password+"','"+name+"')";
-            Log.d("Inser Sign SQL",sql);
+    public void insertSign(String id, String password, String name) {
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            String sql = "INSERT INTO PlanWT (id, password,name) VALUES('" + id + "','" + password + "','" + name + "')";
+            Log.d("Inser Sign SQL", sql);
             db.execSQL(sql);
-            db.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
-        }finally {
-            db.endTransaction();
         }
+    }
+
+    public String getSign(String id, String password) {
+        SQLiteDatabase db = getReadableDatabase();
+        String result = "";
+        //WHERE id = '" + id + "' AND " + "password = '" + password + "';"
+        Cursor cursor = db.rawQuery("SELECT * FROM PlanWT WHERE id ='" + id + "' AND " + "password = '" + password + "';", null);
+
+        while (cursor.moveToNext()) {
+            result += cursor.getString(0) + "/";
+            result += cursor.getString(1) + "/";
+            result += cursor.getString(2) + "/";
+            result += cursor.getString(3) + "/";
+            result += cursor.getString(4) + "/";
+        }
+        Log.d("내용", result);
+
+        return result;
     }
 
 }
