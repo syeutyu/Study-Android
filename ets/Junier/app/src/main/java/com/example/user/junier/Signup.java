@@ -1,11 +1,15 @@
 package com.example.user.junier;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -13,25 +17,53 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONObject;
 
-import java.util.Arrays;
+import static com.example.user.junier.MainActivity.version;
 
 public class Signup extends AppCompatActivity {
     private static LoginButton loginButton;
-    private Button CustomloginButton;
+    //private Button CustomloginButton;
     private CallbackManager callbackManager;
+    Context context= this;
+    private EditText id,password,name;
+    private Button signup;
+    Datebase helper;
+    SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         FacebookSdk.sdkInitialize(getApplicationContext()); // SDK 초기화 (setContentView 보다 먼저 실행되어야합니다. 안그럼 에러납니다.)
         setContentView(R.layout.activity_signup);
+
+        helper = new Datebase(context,Datebase.Schema,null,version);
+        database = helper.getWritableDatabase();
+        id = (EditText)findViewById(R.id.input_email);
+        password = (EditText)findViewById(R.id.input_password);
+        name = (EditText)findViewById(R.id.input_name);
+        signup = (Button)findViewById(R.id.signup);
+
+        Log.d("signup",String.valueOf(signup));
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uid = id.getText().toString();
+                String upassword = password.getText().toString();
+                String uname = name.getText().toString();
+
+                helper.insertSign(database,uid,upassword,uname);
+                Snackbar.make(view,"회원 가입 완료",Snackbar.LENGTH_SHORT).show();
+                Intent intent = new Intent(context,MainShow.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
         callbackManager = CallbackManager.Factory.create();  //로그인 응답을 처리할 콜백 관리자
         loginButton = (LoginButton)findViewById(R.id.login_button); //페이스북 로그인 버튼
         //유저 정보, 친구정보, 이메일 정보등을 수집하기 위해서는 허가(퍼미션)를 받아야 합니다.
@@ -68,32 +100,32 @@ public class Signup extends AppCompatActivity {
             public void onCancel() { }
         });
 
-        CustomloginButton = (Button)findViewById(R.id.loginBtn);
-        CustomloginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //LoginManager - 요청된 읽기 또는 게시 권한으로 로그인 절차를 시작합니다.
-                LoginManager.getInstance().logInWithReadPermissions(Signup.this,
-                        Arrays.asList("public_profile", "user_friends"));
-                LoginManager.getInstance().registerCallback(callbackManager,
-                        new FacebookCallback<LoginResult>() {
-                            @Override
-                            public void onSuccess(LoginResult loginResult) {
-                                Log.e("onSuccess", "onSuccess");
-                            }
-
-                            @Override
-                            public void onCancel() {
-                                Log.e("onCancel", "onCancel");
-                            }
-
-                            @Override
-                            public void onError(FacebookException exception) {
-                                Log.e("onError", "onError " + exception.getLocalizedMessage());
-                            }
-                        });
-            }
-        });
+//        CustomloginButton = (Button)findViewById(R.id.loginBtn);
+//        CustomloginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //LoginManager - 요청된 읽기 또는 게시 권한으로 로그인 절차를 시작합니다.
+//                LoginManager.getInstance().logInWithReadPermissions(Signup.this,
+//                        Arrays.asList("public_profile", "user_friends"));
+//                LoginManager.getInstance().registerCallback(callbackManager,
+//                        new FacebookCallback<LoginResult>() {
+//                            @Override
+//                            public void onSuccess(LoginResult loginResult) {
+//                                Log.e("onSuccess", "onSuccess");
+//                            }
+//
+//                            @Override
+//                            public void onCancel() {
+//                                Log.e("onCancel", "onCancel");
+//                            }
+//
+//                            @Override
+//                            public void onError(FacebookException exception) {
+//                                Log.e("onError", "onError " + exception.getLocalizedMessage());
+//                            }
+//                        });
+//            }
+//        });
     }
 
     @Override
@@ -101,4 +133,5 @@ public class Signup extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 }

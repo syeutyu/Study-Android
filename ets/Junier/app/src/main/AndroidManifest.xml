@@ -16,11 +16,6 @@
         <activity android:name=".Week" />
         <activity android:name=".Signup" />
         <activity android:name=".MainShow">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity"
@@ -47,7 +42,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlanCheck" />
-        <activity android:name=".Signin"></activity>
+        <activity android:name=".Signin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class Datebase extends SQLiteOpenHelper{
 
-    public static final String Schema = "container";
+    public static final String Schema = "PlanW";
 
     public Datebase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -29,7 +29,7 @@ public class Datebase extends SQLiteOpenHelper{
     }
 
     public void createDB(SQLiteDatabase db){
-        String sql = "CREATE TABLE" + Schema + "(next time)"; //이부분 수정이 필요합니다
+        String sql = "CREATE TABLE" + Schema + "(id text,password text,name text,date text,purpose text)"; //이부분 수정이 필요합니다
         try{
             db.execSQL(sql);
         }catch(SQLException e){
@@ -40,8 +40,8 @@ public class Datebase extends SQLiteOpenHelper{
     public void insertDate(SQLiteDatabase db,String data,String date){
         db.beginTransaction();
         try{
-            String sql = "insert into"+ Schema +"(name)"+"values('"+data+"','"+date+"')";
-            Log.d("SQL구문",sql);
+            String sql = "insert into"+ Schema +"(date, purpose)"+"values('"+date+"','"+data+"')";
+            Log.d("Inser Date SQL",sql);
             db.execSQL(sql);
             db.setTransactionSuccessful();
         }catch (Exception e){
@@ -49,6 +49,20 @@ public class Datebase extends SQLiteOpenHelper{
         }
         finally {
             db.endTransaction();;
+        }
+    }
+
+    public void insertSign(SQLiteDatabase db,String id,String password,String name){
+        db.beginTransaction();
+        try{
+            String sql = "insert into"+Schema+"(id, password,name)"+"values('"+id+"','"+password+"','"+name+"')";
+            Log.d("Inser Sign SQL",sql);
+            db.execSQL(sql);
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.getMessage();
+        }finally {
+            db.endTransaction();
         }
     }
 
